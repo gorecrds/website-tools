@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARR Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+        }
+        h2 {
+            color: #6a0dad;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #6a0dad;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 15px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #5a0cad;
+        }
+        #result {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+    <script>
+        function calculateARR() {
+            let contractAmount = parseFloat(document.getElementById("contractAmount").value);
+            let contractTerm = parseInt(document.getElementById("contractTerm").value);
+            
+            if (isNaN(contractAmount) || contractAmount <= 0) {
+                alert("Please enter a valid contract amount.");
+                return;
+            }
+            if (isNaN(contractTerm) || contractTerm <= 0) {
+                alert("Please select a valid contract term.");
+                return;
+            }
+            
+            let arr;
+            switch (contractTerm) {
+                case 1:
+                    arr = contractAmount;
+                    break;
+                case 2:
+                    arr = (contractAmount / 2) * 1.1;
+                    break;
+                case 3:
+                    arr = (contractAmount / 3) * 1.25;
+                    break;
+                case 4:
+                    arr = (contractAmount / 4) * 1.35;
+                    break;
+                case 5:
+                    arr = (contractAmount / 5) * 1.40;
+                    break;
+                default:
+                    alert("Invalid contract term selected.");
+                    return;
+            }
+            
+            document.getElementById("result").innerText = "Annual Recurring Revenue (ARR): $" + arr.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>ARR Calculator</h2>
+        <label for="contractAmount">Contract Amount ($):</label>
+        <input type="number" id="contractAmount" placeholder="Enter contract amount" required>
+        
+        <label for="contractTerm">Contract Term:</label>
+        <select id="contractTerm" required>
+            <option value="">Select Term</option>
+            <option value="1">1 Year</option>
+            <option value="2">2 Years</option>
+            <option value="3">3 Years</option>
+            <option value="4">4 Years</option>
+            <option value="5">5 Years</option>
+        </select>
+        
+        <button onclick="calculateARR()">Calculate ARR</button>
+        
+        <h3 id="result"></h3>
+    </div>
+</body>
+</html>
