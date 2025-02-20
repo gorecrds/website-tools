@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARR Calculator</title>
+    <title>Odoo ARR Calculator</title>
     <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
@@ -14,6 +19,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            animation: fadeIn 1.5s ease-in-out;
         }
         .container {
             background: #fff;
@@ -22,6 +28,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
             max-width: 400px;
+            animation: fadeIn 2s ease-in-out;
         }
         h2 {
             color: #6a0dad;
@@ -47,15 +54,23 @@
             cursor: pointer;
             width: 100%;
             border-radius: 5px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
         button:hover {
             background-color: #5a0cad;
+            transform: scale(1.05);
         }
         #result {
             margin-top: 15px;
             font-size: 18px;
             font-weight: bold;
             color: #333;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
         }
     </style>
     <script>
@@ -100,7 +115,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>ARR Calculator</h2>
+        <h2>Odoo ARR Calculator</h2>
         <label for="contractAmount">Contract Amount ($):</label>
         <input type="number" id="contractAmount" placeholder="Enter contract amount" required>
         
@@ -117,6 +132,8 @@
         <button onclick="calculateARR()">Calculate ARR</button>
         
         <h3 id="result"></h3>
+        
+        <div class="footer">Created by Igor Cardoso</div>
     </div>
 </body>
 </html>
