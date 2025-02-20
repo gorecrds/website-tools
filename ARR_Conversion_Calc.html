@@ -36,6 +36,8 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin-bottom: 15px;
             display: none;
+            position: absolute;
+            top: 20px;
         }
 
         .container {
@@ -46,6 +48,8 @@
             text-align: center;
             max-width: 400px;
             animation: fadeIn 2s ease-in-out;
+            position: relative;
+            margin-top: 80px;
         }
 
         h2 {
@@ -105,66 +109,68 @@
     <script>
         function calculateARR() {
             let contractAmount = parseFloat(document.getElementById("contractAmount").value);
-            let contractTerm = parseInt(document.getElementById("contractTerm").value);
-            
+            let contractTerm = document.getElementById("contractTerm").value;
+
             if (isNaN(contractAmount) || contractAmount <= 0) {
                 alert("Please enter a valid contract amount.");
                 return;
             }
-            if (isNaN(contractTerm) || contractTerm <= 0) {
+            if (!contractTerm) {
                 alert("Please select a valid contract term.");
                 return;
             }
-            
+
             let arr;
             switch (contractTerm) {
-                case 1:
+                case "Monthly":
+                    arr = contractAmount * 0.8;
+                    break;
+                case "1":
                     arr = contractAmount;
                     break;
-                case 2:
+                case "2":
                     arr = (contractAmount / 2) * 1.1;
                     break;
-                case 3:
+                case "3":
                     arr = (contractAmount / 3) * 1.25;
                     break;
-                case 4:
+                case "4":
                     arr = (contractAmount / 4) * 1.35;
                     break;
-                case 5:
+                case "5":
                     arr = (contractAmount / 5) * 1.40;
                     break;
                 default:
                     alert("Invalid contract term selected.");
                     return;
             }
-            
+
             let resultBox = document.getElementById("result-box");
-            resultBox.style.display = "block"; // Show the result box
-            document.getElementById("result").innerText = "$" + arr.toFixed(2);
+            let resultText = contractTerm === "Monthly" ? "Monthly Recurring Revenue (MRR): " : "Annual Recurring Revenue (ARR): ";
+
+            resultBox.innerHTML = `<div>${resultText}<span id="arrValue">$${arr.toFixed(2)}</span></div>`;
+            resultBox.style.display = "block";
         }
 
         function resetForm() {
             document.getElementById("contractAmount").value = "";
             document.getElementById("contractTerm").value = "";
-            document.getElementById("result").innerText = "";
-            document.getElementById("result-box").style.display = "none"; // Hide the result box
+            document.getElementById("result-box").style.display = "none";
         }
     </script>
 </head>
 <body>
-    <!-- Result Box (Above the form) -->
-    <div id="result-box" class="result-box">
-        Annual Recurring Revenue (ARR): <span id="result"></span>
-    </div>
+    <div id="result-box" class="result-box"></div>
 
     <div class="container">
         <h2>Odoo ARR Calculator</h2>
-        <label for="contractAmount">Contract Amount ($):</label>
+        <label for="contractAmount">Billing Total Contract Amount ($):</label>
         <input type="number" id="contractAmount" placeholder="Enter contract amount" required>
         
         <label for="contractTerm">Contract Term:</label>
         <select id="contractTerm" required>
             <option value="">Select Term</option>
+            <option value="Monthly">Monthly</option>
             <option value="1">1 Year</option>
             <option value="2">2 Years</option>
             <option value="3">3 Years</option>
