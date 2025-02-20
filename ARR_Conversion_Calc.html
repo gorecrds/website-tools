@@ -35,7 +35,7 @@
             width: 400px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin-bottom: 15px;
-            display: none; /* Initially hidden */
+            display: none;
         }
 
         .container {
@@ -152,7 +152,7 @@
     </script>
 </head>
 <body>
-    <!-- Result Box (Now above the form) -->
+    <!-- Result Box (Above the form) -->
     <div id="result-box" class="result-box">
         Annual Recurring Revenue (ARR): <span id="result"></span>
     </div>
@@ -165,4 +165,19 @@
         <label for="contractTerm">Contract Term:</label>
         <select id="contractTerm" required>
             <option value="">Select Term</option>
-            <o
+            <option value="1">1 Year</option>
+            <option value="2">2 Years</option>
+            <option value="3">3 Years</option>
+            <option value="4">4 Years</option>
+            <option value="5">5 Years</option>
+        </select>
+        
+        <div class="button-container">
+            <button onclick="calculateARR()">Calculate</button>
+            <button class="reset" onclick="resetForm()">Reset</button>
+        </div>
+
+        <div class="footer">Created by Igor Cardoso</div>
+    </div>
+</body>
+</html>
