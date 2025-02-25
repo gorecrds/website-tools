@@ -146,7 +146,7 @@
             }
 
             let resultBox = document.getElementById("result-box");
-            let resultText = contractTerm === "Monthly" ? "Monthly Recurring Revenue (MRR): " : "Annual Recurring Revenue (ARR): ";
+            let resultText = contractTerm === "Monthly" ? "Monthly Contract Value" : "Annual Contract Value";
 
             resultBox.innerHTML = `<div>${resultText}<span id="arrValue">$${arr.toFixed(2)}</span></div>`;
             resultBox.style.display = "block";
